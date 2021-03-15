@@ -27,7 +27,6 @@ RUN true \
         libboost-filesystem-dev \
         # PostgreSQL.
         postgresql-contrib \
-        postgresql-server-dev-12 \
         # PHP and Apache 2.
         # php \
         # php-intl \
@@ -43,7 +42,14 @@ RUN true \
         # Misc.
         git \
         curl \
-        libicu-dev
+        wget \
+        libicu-dev \
+        gnupg
+
+RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt buster-pgdg main" > /etc/apt/sources.list.d/pgdg.list' && \
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+    apt-get update && \
+    apt install -y postgresql-server-dev-12
 
 RUN docker-php-ext-install intl pgsql pdo_pgsql && docker-php-ext-enable intl pgsql pdo_pgsql
 
