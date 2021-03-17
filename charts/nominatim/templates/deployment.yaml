@@ -39,6 +39,12 @@ spec:
         # Our PHP-FPM application
         - image: ghcr.io/pjstaab/nominatim:latest
           name: nominatim
+          env:
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DATABASE_PASSWORD
+                  name: nominatim-secret
           volumeMounts:
             - name: shared-files
               mountPath: /var/www/html
