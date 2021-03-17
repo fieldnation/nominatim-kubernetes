@@ -6,6 +6,6 @@ dependencies:
   - name: common
     repository: https://charts.bitnami.com/bitnami
     version: 1.3.9
-  - name: postgresql
+  - name: postgresql-ha
     repository: https://charts.bitnami.com/bitnami
-    version: 10.3.5
+    version: 6.7.0
