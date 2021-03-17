@@ -5,16 +5,16 @@ RUN apt-get -y update -qq \
         -o APT::Install-Suggests="false" \
         # Build tools from sources.
         build-essential \
-        g++ \
         cmake \
         git \
         wget \
+        ca-certificates \
         gnupg
 
 RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt buster-pgdg main" > /etc/apt/sources.list.d/pgdg.list' \
     && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
     && apt-get update \
-    && apt install -y postgresql-server-dev-12
+    && apt install -y postgresql-server-dev-11
 
 ENV NOMINATIM_VERSION v3.6.0
 
@@ -30,12 +30,9 @@ RUN true \
     && cd src \
     && mkdir build \
     && cd build \
-    && cmake .. \
-    && make -j`nproc` \
-    && ./utils/setup.php --setup-website \
-    && mv ./module/nominatim.so website/nominatim.so \
-    && chmod o=rwx .
+    && cmake -DBUILD_IMPORTER=off -DBUILD_API=off -DBUILD_TESTS=off -DBUILD_DOCS=off -DBUILD_OSM2PGSQL=off .. \
+    && make -j`nproc`
 
 
 FROM bitnami/postgresql:11
-COPY --from=builder nominatim.so /opt/bitnami/postgresql/lib/nominatim.so
+COPY --from=builder /src/build/module/nominatim.so /opt/bitnami/postgresql/lib/nominatim.so
