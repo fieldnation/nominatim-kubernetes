@@ -46,11 +46,6 @@ RUN true \
         libicu-dev \
         gnupg
 
-RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt buster-pgdg main" > /etc/apt/sources.list.d/pgdg.list' && \
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
-    apt-get update && \
-    apt install -y postgresql-server-dev-12
-
 RUN docker-php-ext-install intl pgsql pdo_pgsql && docker-php-ext-enable intl pgsql pdo_pgsql
 
 # Osmium install to run continuous updates.
@@ -72,10 +67,9 @@ RUN true \
     && cd src \
     && mkdir build \
     && cd build \
-    && cmake .. \
+    && cmake -DBUILD_MODULE=off .. \
     && make -j`nproc` \
     && ./utils/setup.php --setup-website \
-    && mv ./module/nominatim.so website/nominatim.so \
     && chmod o=rwx .
 
 RUN mv /var/www/html/src /app/src
