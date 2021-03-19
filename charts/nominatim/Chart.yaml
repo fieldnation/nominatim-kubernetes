@@ -6,3 +6,8 @@ dependencies:
   - name: postgresql-ha
     repository: https://charts.bitnami.com/bitnami
     version: 6.7.0
+    condition: postgresql-ha.enabled
+  - name: postgresql
+    repository: https://charts.bitnami.com/bitnami
+    version: 10.3.5
+    condition: postgresql.enabled

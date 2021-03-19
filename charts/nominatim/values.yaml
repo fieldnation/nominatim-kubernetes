@@ -13,5 +13,6 @@ DATABASE_USER: 'postgres'
 DATABASE_PASSWORD: 'changeMe'
 CONST_Database_Module_Path: '/opt/bitnami/postgresql/lib'
 postgresql-ha:
-  image:
-    tag: 12
+  enabled: false
+postgresql:
+  enabled: false
