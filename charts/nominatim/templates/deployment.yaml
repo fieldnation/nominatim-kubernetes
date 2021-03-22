@@ -39,6 +39,9 @@ spec:
         # Our PHP-FPM application
         - image: ghcr.io/pjstaab/nominatim:latest
           name: nominatim
+          {{- if .Values.resources }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
           env:
             - name: DATABASE_PASSWORD
               valueFrom:
