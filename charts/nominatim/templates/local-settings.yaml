@@ -15,6 +15,7 @@ data:
     @define('CONST_Pyosmium_Binary', {{ .Values.CONST_Pyosmium_Binary | quote }});
     @define('CONST_Database_DSN', 'pgsql:dbname={{ .Values.DATABASE_NAME }};host={{ .Values.DATABASE_HOST }};port={{ .Values.DATABASE_PORT }};user={{ .Values.DATABASE_USER }};' . 'password=' . $password); //<driver>:host=<host>;port=<port>;user=<username>;password=<password>;dbname=<database>
     @define('CONST_Database_Module_Path', {{ .Values.CONST_Database_Module_Path | quote }});
+    @define('CONST_Osm2pgsql_Flatnode_File', {{ .Values.CONST_Osm2pgsql_Flatnode_File | quote }});
 
 kind: ConfigMap
 metadata:

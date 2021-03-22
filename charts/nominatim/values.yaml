@@ -6,12 +6,13 @@ CONST_Replication_MaxInterval: '86400'
 CONST_Replication_Update_Interval: '86400'
 CONST_Replication_Recheck_Interval: '900'
 CONST_Pyosmium_Binary: '/usr/local/bin/pyosmium-get-changes'
-DATABASE_NAME: 'nominatim-postgresql'
+DATABASE_NAME: 'nominatim'
 DATABASE_HOST: 'nominatim-postgresql'
 DATABASE_PORT: '5432'
 DATABASE_USER: 'postgres'
 DATABASE_PASSWORD: 'changeMe'
 CONST_Database_Module_Path: '/opt/bitnami/postgresql/lib'
+CONST_Osm2pgsql_Flatnode_File: '/tmp/osm-cache.bin'
 postgresql-ha:
   enabled: false
 postgresql:
