@@ -60,7 +60,7 @@ spec:
                 command:
                   - bash
                   - -c
-                  - "cp -r /app/src /var/www/html"
+                  - "cp -r /app/src /var/www/html && /var/www/html/src/build/utils/setup.php --setup-website"
       volumes:
         - name: shared-files
           emptyDir: {}
