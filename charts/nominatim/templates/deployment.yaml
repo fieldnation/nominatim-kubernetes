@@ -46,8 +46,8 @@ spec:
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: DATABASE_PASSWORD
-                  name: nominatim-secret
+                  key: postgresql-password
+                  name: nominatim-postgresql
           volumeMounts:
             - name: shared-files
               mountPath: /var/www/html
